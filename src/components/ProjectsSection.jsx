@@ -16,7 +16,7 @@ const projects = [
     title: "Credible Investment Experts",
     description:
       "A full-stack MERN investment tracker with profit calculations, user dashboards, admin controls, and secure login for managing investments in real time.",
-    image: "/src/assets/credibel.png",
+    image: "/public/projects/credibel.png",
     tags: ["MongoDB", "Express.js", "React", "Node.js"],
     demoUrl: "#",
     githubUrl: "#",
