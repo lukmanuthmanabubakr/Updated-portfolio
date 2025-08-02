@@ -3,8 +3,9 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Car Rnetals",
-    description: "A sleek car rental landing page built with React, Node JS",
+    title: "Car Rentals",
+    description:
+      "A sleek car rental landing page built with React and Node.js, showcasing available cars, pricing, and responsive design for a seamless booking experience.",
     image: "/projects/Img1.png",
     tags: ["React", "TailwindCSS", "NodeJs"],
     demoUrl: "https://car-rental-gs.vercel.app/",
@@ -12,11 +13,11 @@ const projects = [
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
+    title: "Credible Investment Experts",
     description:
-      "Interactive analytics dashboard with data visualization and filtering capabilities.",
-    image: "/projects/project2.png",
-    tags: ["TypeScript", "D3.js", "Next.js"],
+      "A full-stack MERN investment tracker with profit calculations, user dashboards, admin controls, and secure login for managing investments in real time.",
+    image: "/src/assets/credibel.png",
+    tags: ["MongoDB", "Express.js", "React", "Node.js"],
     demoUrl: "#",
     githubUrl: "#",
   },
@@ -24,13 +25,14 @@ const projects = [
     id: 3,
     title: "E-commerce Platform",
     description:
-      "Full-featured e-commerce platform with user authentication and payment processing.",
+      "Full-featured e-commerce platform with user authentication, secure payments, product filtering, and a seamless shopping cart experience for buyers.",
     image: "/projects/project3.png",
     tags: ["React", "Node.js", "Stripe"],
     demoUrl: "#",
     githubUrl: "#",
   },
 ];
+
 
 export const ProjectsSection = () => {
   return (
