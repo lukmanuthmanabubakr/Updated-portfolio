@@ -16,7 +16,7 @@ export const Home = () => {
       {/* Background Effects Section*/}
       <StarBackground />
 
-      {/* Navbar */}
+      {/* Navbar Section*/}
       <Navbar />
       {/* Main Content */}
       <main>
