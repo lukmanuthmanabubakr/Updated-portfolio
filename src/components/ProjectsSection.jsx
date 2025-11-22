@@ -1,4 +1,5 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import BuildIt from "../../public/BuildIt.png"
 
 const projects = [
   {
@@ -13,13 +14,13 @@ const projects = [
   },
   {
     id: 2,
-    title: "Credible Investment Experts",
+    title: "BuildIt",
     description:
-      "A full-stack MERN investment tracker with profit calculations, user dashboards, admin controls, and secure login for managing investments in real time.",
-    image: "/public/projects/credibel.png",
+      "BuildIt is a platform designed to transform your old-school, plain resume into a modern, clean, professional version that fits any career path. Tech, medicine, finance, engineering, anything.",
+    image: BuildIt,
     tags: ["MongoDB", "Express.js", "React", "Node.js"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://build-it-omega.vercel.app/",
+    githubUrl: "https://github.com/lukmanuthmanabubakr/Resume-frontend",
   },
   {
     id: 3,
