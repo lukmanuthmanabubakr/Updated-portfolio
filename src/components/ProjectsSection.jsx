@@ -1,5 +1,6 @@
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
-import BuildIt from "../../public/BuildIt.png"
+import BuildIt from "../../public/BuildIt.png";
+import QuicGPT from "../../public/QuickGPT.png";
 
 const projects = [
   {
@@ -24,16 +25,15 @@ const projects = [
   },
   {
     id: 3,
-    title: "E-commerce Platform",
+    title: "QuickGPT",
     description:
-      "Full-featured e-commerce platform with user authentication, secure payments, product filtering, and a seamless shopping cart experience for buyers.",
-    image: "/projects/project3.png",
+      "QuickGPT is an AI platform I built to give users a smooth, powerful and intuitive experience. It supports text generation for asking questions or getting ideas, image generation based on custom prompts, and a seamless credit system powered by Stripe so users can easily top up whenever needed. The interface is simple, responsive and designed to make every interaction fast and enjoyable.",
+    image: QuicGPT,
     tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://quick-chat-eight-topaz.vercel.app",
+    githubUrl: "https://github.com/lukmanuthmanabubakr/Quick-chat",
   },
 ];
-
 
 export const ProjectsSection = () => {
   return (
