@@ -1,109 +1,91 @@
 @import "tailwindcss";
 
 @theme {
-  --color-border: hsl(var(--border));
-  --color-background: hsl(var(--background));
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink: hsl(var(--ink));
+  --color-ink-raised: hsl(var(--ink-raised));
   --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-line: hsl(var(--line));
 
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
+  --color-amber: hsl(var(--amber));
+  --color-amber-foreground: hsl(var(--amber-foreground));
+  --color-teal: hsl(var(--teal));
   --color-card: hsl(var(--card));
 
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
-  --animate-fade-in: fade-in 0.7s ease-out forwards;
-  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
-  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
-  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
-  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
-  --animate-meteor: meteor 5s linear infinite;
+  --animate-rise: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-rise-1: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  --animate-rise-2: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+  --animate-rise-3: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.34s forwards;
+  --animate-rise-4: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
+  --animate-blink: blink 2.2s ease-in-out infinite;
+  --animate-scan: scan 8s linear infinite;
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-  @keyframes fade-in {
+  @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(16px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+  @keyframes scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -800px; }
+  }
+  @keyframes grow-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
 }
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --ink: 222 45% 7%;
+    --ink-raised: 222 34% 11%;
+    --foreground: 210 32% 94%;
+    --muted: 216 16% 62%;
+    --line: 220 22% 22%;
 
-    --card: 0 0% 100%;
-
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
-
-    --border: 214 32% 91%;
-  }
-
-  .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
-
-    --card: 222 47% 8%;
-
-    --primary: 250 65% 65%;
-    --primary-foreground: 213 31% 91%;
-
-    --border: 217 33% 20%;
+    --amber: 38 100% 58%;
+    --amber-foreground: 222 45% 9%;
+    --teal: 171 62% 47%;
+    --card: 222 36% 10%;
   }
 
   * {
-    @apply border-border;
+    border-color: hsl(var(--line));
   }
 
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    background-color: hsl(var(--ink));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 }
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
 
   @media (width >= 640px) {
     max-width: 640px;
@@ -115,48 +97,53 @@
     max-width: 1024px;
   }
   @media (width >= 1280px) {
-    max-width: 1280px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
+    max-width: 1200px;
   }
 }
 
-@utility text-glow {
-  @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+/* Faint engineering grid, evokes graph paper / coordinate space */
+@utility grid-field {
+  background-image:
+    linear-gradient(hsl(var(--line) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--line) / 0.35) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
 
-@utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+@utility mono-tag {
+  @apply font-mono text-xs tracking-[0.18em] uppercase text-muted;
 }
 
-@utility gradient-border {
-  @apply relative rounded-md;
-  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
-  background-clip: padding-box;
-  border: 1px solid transparent;
+@utility log-divider {
+  @apply flex items-center gap-4 mb-4;
 }
 
-@utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
-         transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
-         hover:scale-105 active:scale-95;
+@utility panel {
+  @apply bg-card border border-line rounded-none;
 }
 
-@utility star {
-  @apply absolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+@utility signal-button {
+  @apply inline-flex items-center gap-2 px-6 py-3 bg-amber text-amber-foreground font-mono text-sm
+         uppercase tracking-wide transition-all duration-300
+         hover:shadow-[0_0_0_1px_hsl(var(--amber)),0_0_28px_-4px_hsl(var(--amber)/0.6)]
+         active:scale-[0.98];
 }
 
-@utility meteor {
-  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+@utility outline-button {
+  @apply inline-flex items-center gap-2 px-6 py-3 border border-line text-foreground font-mono text-sm
+         uppercase tracking-wide transition-all duration-300
+         hover:border-teal hover:text-teal;
+}
+
+@utility card-lift {
+  @apply transition-all duration-300 hover:-translate-y-1;
+}
+
+@utility live-dot {
+  @apply relative inline-flex h-2 w-2 rounded-full bg-teal animate-blink;
 }
 
 #root {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0;
-  text-align: center;
 }
