@@ -1,21 +1,77 @@
 import { ArrowRight, ArrowUpRight, Github } from "lucide-react";
+import { cn } from "@/lib/utils";
 import BuildIt from "../../public/BuildIt.png";
-import QuicGPT from "../../public/QuickGPT.png";
-import BookNow from "../../public/Booknow.png";
+import SkillTracker from "../../public/skill-b-t.png";
+import TTLTours from "../../public/ttl.jpeg";
+
+const methodStyles = {
+  GET: "bg-teal/15 text-teal",
+  POST: "bg-amber/15 text-amber",
+  PATCH: "bg-foreground/10 text-foreground/80",
+  PUT: "bg-foreground/10 text-foreground/80",
+  DELETE: "bg-foreground/10 text-foreground/60",
+};
+
+// Reusable stand-in for a project preview when there's an interactive
+// Swagger/OpenAPI doc instead of a static screenshot. Reuse this for the
+// next backend projects that get Swagger docs added.
+const SwaggerPreview = ({ label, endpoints }) => (
+  <div className="h-44 border-b border-line bg-ink flex flex-col">
+    <div className="flex items-center gap-2 px-3 py-2.5 border-b border-line/70 shrink-0">
+      <span className="h-2 w-2 rounded-full bg-line" />
+      <span className="h-2 w-2 rounded-full bg-line" />
+      <span className="h-2 w-2 rounded-full bg-line" />
+      <span className="ml-2 font-mono text-[10px] text-muted truncate">
+        {label}
+      </span>
+      <span className="ml-auto live-dot shrink-0" />
+    </div>
+    <div className="flex-1 px-3 py-2.5 space-y-2 overflow-hidden">
+      {endpoints.map((e) => (
+        <div key={e.path} className="flex items-center gap-2 font-mono text-[10px]">
+          <span
+            className={cn(
+              "px-1.5 py-0.5 font-semibold tracking-wide shrink-0",
+              methodStyles[e.method]
+            )}
+          >
+            {e.method}
+          </span>
+          <span className="text-muted truncate">{e.path}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const otherProjects = [
   {
     id: 1,
-    title: "Book Now",
+    title: "Skill-Based Learner Tracker",
     description:
-      "A car rental booking front end built with React and Node.js: available fleet, pricing and a responsive booking flow from search to confirmation.",
-    image: BookNow,
-    tags: ["React", "Tailwind CSS", "Node.js"],
-    demoUrl: "https://car-rental-booking.vercel.app/",
-    githubUrl: "#",
+      "A backend API that tracks how a learner's skills develop over time, moving them through mastery levels as they progress, with the whole thing documented and testable straight from Swagger.",
+    image: SkillTracker,
+    tags: ["Node.js", "Swagger"],
+    demoUrl: "https://skill-based-learner-tracker.vercel.app/api/docs",
+    githubUrl: "https://github.com/lukmanuthmanabubakr/Skill-Based-Learner-Tracker",
   },
   {
     id: 2,
+    title: "Velo (Ledger-Core)",
+    description:
+      "A financial reconciliation engine: a Nomba webhook handler with idempotent event handling, a payment-matching engine that reconciles incoming transfers against pending invoices, and an immutable ledger writer behind all of it, run through BullMQ and Redis.",
+    endpoints: [
+      { method: "POST", path: "/webhooks/nomba" },
+      { method: "POST", path: "/reconciliation/run" },
+      { method: "GET", path: "/ledger/:accountId" },
+      { method: "GET", path: "/transactions/:id/status" },
+    ],
+    tags: ["Node.js", "Redis", "BullMQ", "Nomba"],
+    demoUrl: "https://velo-credit-ledger-core.vercel.app/",
+    githubUrl: "https://github.com/Ledger-OS-Infra",
+  },
+  {
+    id: 3,
     title: "BuildIt",
     description:
       "A resume rebuilder that turns a plain CV into a clean, modern document tailored to any career path, from tech to medicine to finance.",
@@ -24,21 +80,12 @@ const otherProjects = [
     demoUrl: "https://build-it-omega.vercel.app/",
     githubUrl: "https://github.com/lukmanuthmanabubakr/Resume-frontend",
   },
-  {
-    id: 3,
-    title: "QuickGPT",
-    description:
-      "An AI platform for text and image generation with a Stripe-backed credit system, built for a fast, uncomplicated top-up-and-go experience.",
-    image: QuicGPT,
-    tags: ["React", "Node.js", "Stripe"],
-    demoUrl: "https://quick-chat-eight-topaz.vercel.app",
-    githubUrl: "https://github.com/lukmanuthmanabubakr/Quick-chat",
-  },
 ];
 
-const TTLMockup = () => (
+// Browser-chrome frame wrapping the real screenshot, keeps the branded
+// "live site" look instead of a bare, edge-to-edge image.
+const TTLPreview = () => (
   <div className="panel overflow-hidden">
-    {/* browser chrome */}
     <div className="flex items-center gap-2 px-4 py-3 border-b border-line bg-ink">
       <span className="h-2.5 w-2.5 rounded-full bg-line" />
       <span className="h-2.5 w-2.5 rounded-full bg-line" />
@@ -48,40 +95,11 @@ const TTLMockup = () => (
       </span>
       <span className="ml-auto live-dot" />
     </div>
-
-    {/* faux interface */}
-    <div className="p-6 space-y-4 bg-ink">
-      <div className="flex items-center justify-between">
-        <div className="h-2.5 w-24 bg-foreground/20" />
-        <div className="flex gap-2">
-          <div className="h-6 w-14 border border-line" />
-          <div className="h-6 w-14 bg-amber/90" />
-        </div>
-      </div>
-
-      <div className="h-28 sm:h-36 border border-line relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-70"
-          style={{
-            background:
-              "linear-gradient(135deg, hsl(var(--teal)/0.35), transparent 60%), linear-gradient(315deg, hsl(var(--amber)/0.3), transparent 55%)",
-          }}
-        />
-        <span className="absolute left-3 top-1/2 h-2 w-2 rounded-full bg-amber" />
-        <span className="absolute left-1/3 top-1/3 h-2 w-2 rounded-full bg-teal" />
-        <span className="absolute right-8 bottom-6 h-2 w-2 rounded-full bg-teal" />
-        <span className="absolute right-1/4 top-1/4 h-2 w-2 rounded-full bg-amber" />
-        <svg className="absolute inset-0 h-full w-full opacity-40" viewBox="0 0 300 140" fill="none">
-          <path d="M20 70 Q100 20 150 47 T280 100" stroke="hsl(var(--foreground))" strokeWidth="1" strokeDasharray="4 4" />
-        </svg>
-      </div>
-
-      <div className="grid grid-cols-3 gap-3">
-        <div className="h-16 border border-line bg-foreground/5" />
-        <div className="h-16 border border-line bg-foreground/5" />
-        <div className="h-16 border border-line bg-foreground/5" />
-      </div>
-    </div>
+    <img
+      src={TTLTours}
+      alt="TTL Tours live site"
+      className="w-full h-auto block"
+    />
   </div>
 );
 
@@ -104,7 +122,6 @@ export const ProjectsSection = () => {
           something specific.
         </p>
 
-        {/* Flagship: TTL Tours */}
         <div className="panel p-0 overflow-hidden mb-20 grid grid-cols-1 lg:grid-cols-2">
           <div className="p-8 md:p-10 flex flex-col justify-center order-2 lg:order-1">
             <span className="mono-tag text-teal mb-4">Flagship &middot; Live</span>
@@ -144,22 +161,28 @@ export const ProjectsSection = () => {
             </a>
           </div>
           <div className="p-6 md:p-10 order-1 lg:order-2 flex items-center bg-ink-raised/30">
-            <TTLMockup />
+            <TTLPreview />
           </div>
         </div>
 
-        {/* Other builds */}
         <h3 className="mono-tag mb-8 text-left">More builds</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {otherProjects.map((project) => (
             <div key={project.id} className="panel overflow-hidden card-lift text-left">
-              <div className="h-44 overflow-hidden border-b border-line">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              {project.image ? (
+                <div className="h-44 overflow-hidden border-b border-line">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+              ) : (
+                <SwaggerPreview
+                  label={new URL(project.demoUrl).pathname}
+                  endpoints={project.endpoints}
                 />
-              </div>
+              )}
 
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
