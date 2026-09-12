@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import BuildIt from "../../public/BuildIt.png";
 import SkillTracker from "../../public/skill-b-t.png";
 import TTLTours from "../../public/ttl.jpeg";
+import URLShortner from "../../public/url-shortner.png";
 
 const methodStyles = {
   GET: "bg-teal/15 text-teal",
@@ -47,6 +48,16 @@ const SwaggerPreview = ({ label, endpoints }) => (
 const otherProjects = [
   {
     id: 1,
+    title: "URL Shortener",
+    description:
+      "A production-grade URL shortener backend, not just a redirect generator: JWT auth with refresh rotation, a Redis-backed key pool and cache-aside redirects, async click analytics via BullMQ, rate limiting, SSRF prevention, bulk CSV shortening, and developer API keys, all backed by a full OWASP security audit and live k6 load testing with documented findings.",
+    image: URLShortner,
+    tags: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "OpenTelemetry", "Docker"],
+    demoUrl: "https://url-shortener-f9m9.onrender.com/api-docs",
+    githubUrl: "https://github.com/lukmanuthmanabubakr/url-shortener",
+  },
+  {
+    id: 2,
     title: "Skill-Based Learner Tracker",
     description:
       "A backend API that tracks how a learner's skills develop over time, moving them through mastery levels as they progress, with the whole thing documented and testable straight from Swagger.",
@@ -56,7 +67,7 @@ const otherProjects = [
     githubUrl: "https://github.com/lukmanuthmanabubakr/Skill-Based-Learner-Tracker",
   },
   {
-    id: 2,
+    id: 3,
     title: "Velo (Ledger-Core)",
     description:
       "A financial reconciliation engine: a Nomba webhook handler with idempotent event handling, a payment-matching engine that reconciles incoming transfers against pending invoices, and an immutable ledger writer behind all of it, run through BullMQ and Redis.",
@@ -71,7 +82,7 @@ const otherProjects = [
     githubUrl: "https://github.com/Ledger-OS-Infra",
   },
   {
-    id: 3,
+    id: 4,
     title: "BuildIt",
     description:
       "A resume rebuilder that turns a plain CV into a clean, modern document tailored to any career path, from tech to medicine to finance.",
